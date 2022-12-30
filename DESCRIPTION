@@ -2,10 +2,18 @@ Package: blog2newsletter
 Title: Helps You Send Blog Posts as Emails
 Version: 0.0.1
 Authors@R: 
-    person("Robert", "M", "Flight", , "rflight79@gmail.com", role = c("aut", "cre"),
+    person(given = c("Robert", "M"), family = "Flight", email = "rflight79@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8141-7788"))
 Description: Provides functions to help automate sending blog posts to subscribers email addresses.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+Imports: 
+    cli,
+    gmailr,
+    googlesheets4,
+    here,
+    purrr,
+    rlang,
+    tibble
