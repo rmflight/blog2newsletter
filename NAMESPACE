@@ -2,3 +2,4 @@
 
 export(b2n_clean_subscribers)
 export(b2n_fetch_subscribers)
+export(create_cache_directory)
