@@ -44,6 +44,7 @@ b2n_fetch_subscribers = function(sheet_id = NULL,
     if ((difftime(Sys.Date(), cache_mtime, units = "hours") > 24) || force_fetch) {
       subscriber_data = googlesheets4::read_sheet(sheet_id) |>
         b2n_clean_subscribers()
+      save_subscriber_cache(subscriber_data, cache = cache)
       message(cli::format_message(c(
         "Reading subscribers from the web, and caching them in {cache}.",
         "i" = "You can change the cache location by modifying {.arg cache}."
@@ -55,12 +56,33 @@ b2n_fetch_subscribers = function(sheet_id = NULL,
         "i" = "You can force fetching from the web using {.arg force_fetch = TRUE}."
       )))
     }
-  }
+  } else {
+    if (dir.exists(dirname(cache))) {
+      subscriber_data = googlesheets4::read_sheet(sheet_id) |>
+        b2n_clean_subscribers()
+      save_subscriber_cache(subscriber_data, cache = cache)
+      message(cli::format_message(c(
+        "Reading subscribers from the web, and caching them in {cache}.",
+        "i" = "You can change the cache location by modifying {.arg cache}."
+      )))
+    } else {
+      cache_dir = dirname(cache)
+      stop(cli::format_error(c("{.file {cache_dir}} directory doesn't exist!",
+                               "i" = "You can create the cache directory using {.fun create_cache_directory}.")))
+    }
 
+  }
+  return(subscriber_data)
 }
 
 get_subscriber_cache = function(cache = "_blog2newsletter/subscribers")
 {
   subscriber_data = readRDS(cache)
   subscriber_data
+}
+
+save_subscriber_cache = function(subscriber_data,
+                                 cache = "_blog2newsletter/subscribers")
+{
+  saveRDS(subscriber_data, cache)
 }
