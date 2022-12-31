@@ -14,7 +14,7 @@ create_cache_directory = function(cache = "_blog2newsletter")
   if (dir_made) {
     cli::cli_alert_success("Created cache directory {.file {cache_loc}}.")
   } else {
-    message(cli::format_message(c("x" = "Couldn't create cache directory {.file {cache_loc}}.",
+    stop(cli::format_error(c("Couldn't create cache directory {.file {cache_loc}}.",
                           "i" = "Do you have write permissions in this directory?")))
   }
   invisible()
