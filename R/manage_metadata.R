@@ -6,47 +6,44 @@
 #'
 #' @export
 #' @return invisible
-create_cache_directory = function(cache = "_blog2newsletter")
+b2n_init = function(r_script = "_blog2newsletter.R",
+                    cache = "_blog2newsletter")
 {
-  root_dir = rprojroot::find_root(proj_or_pkg_root)
-  cache_loc = file.path(root_dir, cache)
-  dir_made = dir.create(cache_loc)
-  if (dir_made) {
-    cli::cli_alert_success("Created cache directory {.file {cache_loc}}.")
+  if (!file.exists(r_script)) {
+    file.create(r_script)
+    cli::cli_alert_success("Created file {.file {r_script}}.")
   } else {
-    stop(cli::format_error(c("Couldn't create cache directory {.file {cache_loc}}.",
-                          "i" = "Do you have write permissions in this directory?")))
+    cli::cli_alert_info("{.file {r_script}} already exists, doing nothing.")
+  }
+
+  if (!dir.exists(cache)) {
+    dir.create(cache)
+    cli::cli_alert_success("Created directory {.file {cache}}.")
+  } else {
+    cli::cli_alert_info("{.file {cache}} already exists, doing nothing.")
   }
   invisible()
 }
 
-proj_or_pkg_root = rprojroot::root_criterion(function(path){
-  file.exists(file.path(path, "DESCRIPTION")) || file.exists(Sys.glob(file.path(path, "*.Rproj")))
-},
-  "has DESCRIPTION or .Rproj")
 
-check_for_cache = function(cache = "_blog2newsletter")
+b2n_check_for_cache = function(cache = "_blog2newsletter")
 {
 
-  root_dir = rprojroot::find_root(proj_or_pkg_root)
-  if (dir.exists(file.path(root_dir, cache)) || file.exists(file.path(root_dir, "DESCRIPTION"))) {
-    return(TRUE)
+  if (dir.exists(cache)) {
+    return(invisible())
   } else {
-    return(FALSE)
+    stop(cli::format_error(c("Cache directory {.file {cache}} not found.",
+                           "i" = "You can create the cache directory using {.fun b2n_init}.")))
   }
 }
 
-message_missing_cache = function()
+b2n_check_for_runfile = function(r_script = "_blog2newsletter.R")
 {
-  has_cache = check_for_cache()
 
-  if (!has_cache) {
-    message(cli::format_message(c(
-      "blog2newletter couldn't find the cache to store some information.",
-      "i" = "You can create a cache using {.fun create_cache_directory}."
-    )))
+  if (file.exists(r_script)) {
+    return(invisible())
+  } else {
+  stop(cli::format_error(c("r_script {.file {r_script}} found.",
+                             "i" = "You can create the run file using {.fun b2n_init}.")))
   }
-  invisible()
 }
-
-rlang::on_load(message_missing_cache())

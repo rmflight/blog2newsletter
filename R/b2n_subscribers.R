@@ -29,7 +29,7 @@ b2n_clean_subscribers = function(subscriber_info)
 #' @return tibble
 #' @export
 b2n_fetch_subscribers = function(sheet_id = NULL,
-                                 cache = "_blog2newsletter/subscribers",
+                                 cache = "_blog2newsletter",
                                  force_fetch = FALSE)
 {
   if (is.null(sheet_id)) {
@@ -39,20 +39,21 @@ b2n_fetch_subscribers = function(sheet_id = NULL,
     ))
   }
 
-  if (file.exists(cache)) {
-    cache_mtime = file.mtime(cache)
+  subscriber_cache = file.path(cache, "subscribers")
+  if (fs::file_exists(subscriber_cache)) {
+    cache_mtime = file.mtime(subscriber_cache)
     if ((difftime(Sys.Date(), cache_mtime, units = "hours") > 24) || force_fetch) {
       subscriber_data = googlesheets4::read_sheet(sheet_id) |>
         b2n_clean_subscribers()
-      save_subscriber_cache(subscriber_data, cache = cache)
+      save_subscriber_cache(subscriber_data, cache = subscriber_cache)
       message(cli::format_message(c(
-        "Reading subscribers from the web, and caching them in {cache}.",
-        "i" = "You can change the cache location by modifying {.arg cache}."
+        "Reading subscribers from the web, and caching them under {cache}.",
+        "i" = "You can change the blog2newsletter cache location by modifying {.arg cache}."
       )))
     } else {
-      subscriber_data = get_subscriber_cache(cache)
+      subscriber_data = get_subscriber_cache(subscriber_cache)
       message(cli::format_message(c(
-        "Reading subscribers from the cache file at {cache}.",
+        "Reading subscribers from the cache file under {cache}.",
         "i" = "You can force fetching from the web using {.arg force_fetch = TRUE}."
       )))
     }
@@ -60,14 +61,14 @@ b2n_fetch_subscribers = function(sheet_id = NULL,
     if (dir.exists(dirname(cache))) {
       subscriber_data = googlesheets4::read_sheet(sheet_id) |>
         b2n_clean_subscribers()
-      save_subscriber_cache(subscriber_data, cache = cache)
+      save_subscriber_cache(subscriber_data, cache = subscriber_cache)
       message(cli::format_message(c(
         "Reading subscribers from the web, and caching them in {cache}.",
         "i" = "You can change the cache location by modifying {.arg cache}."
       )))
     } else {
-      cache_dir = dirname(cache)
-      stop(cli::format_error(c("{.file {cache_dir}} directory doesn't exist!",
+
+      stop(cli::format_error(c("{.file {cache}} directory doesn't exist!",
                                "i" = "You can create the cache directory using {.fun create_cache_directory}.")))
     }
 

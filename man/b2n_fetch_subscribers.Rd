@@ -6,7 +6,7 @@
 \usage{
 b2n_fetch_subscribers(
   sheet_id = NULL,
-  cache = "_blog2newsletter/subscribers",
+  cache = "_blog2newsletter",
   force_fetch = FALSE
 )
 }
