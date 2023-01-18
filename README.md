@@ -102,11 +102,7 @@ from.
 
 Here are the categories I put on my own subscription form:
 
-``` r
-knitr::include_graphics("resources/rmflight_categories.png")
-```
-
-<img src="resources/rmflight_categories.png" width="100%" />
+<img src="man/figures/rmflight_categories.png" width="100%" />
 
 These categories are based on looking at my blog sidebar, and looking at
 the categories with the most posts.
@@ -127,11 +123,7 @@ newsletter without an email address):
 
 Settings -\> Responses -\> Collect email addresses -\> On
 
-``` r
-knitr::include_graphics("resources/collect_emails.png")
-```
-
-<img src="resources/collect_emails.png" width="100%" />
+<img src="man/figures/collect_emails.png" width="100%" />
 
 If using **categories**, add your categories as **checkboxes** so
 subscribers can choose multiple subjects of posts. If **not using**
@@ -200,7 +192,7 @@ things, `subscribers` and `emails`.
 
 - `subscribers`: stores a local copy of the form submissions from the
   Google Sheet so you aren’t always fetching a new copy. Defaults to
-  refetching after 24 hours.
+  refetching after 168 hours (a week).
 - `emails`: stores what emails you’ve actually sent, so you don’t
   accidentally send one again, unless you really want to for some
   reason.
@@ -230,11 +222,7 @@ unclass(sheet_id)
 You can see the responses as a Google Sheet by clicking the little
 **sheet** icon on your form responses.
 
-``` r
-knitr::include_graphics("resources/where_to_get_sheet.png")
-```
-
-<img src="resources/where_to_get_sheet.png" width="100%" />
+<img src="man/figures/where_to_get_sheet.png" width="100%" />
 
 And generate an initial cache of your subscriber info.
 
@@ -353,8 +341,6 @@ draft_email = b2n_compose(blog_dir,
 
 b2n_send_newsletter(draft_email)
 ```
-
-As much as you might be tempted to keep this subscription stuff in
 
 Then, when you have new post that you want to send, in the subscription
 project, you only have to do:

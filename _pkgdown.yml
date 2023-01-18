@@ -1,0 +1,11 @@
+template:
+  bootstrap: 5
+  bootswatch: darkly
+home:
+  title: An R package to send blog posts as emails / newsletters.
+  description: >
+    Want to add an option for your blog readers to recieve your blog posts in
+    their email without moving to service like SubStack? blog2newsletter has
+    you covered.
+  sidebar:
+    structure: [links, license, community, citation, authors, toc]
