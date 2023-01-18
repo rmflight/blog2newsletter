@@ -4,3 +4,7 @@
 ^README\.Rmd$
 ^resources$
 ^docs$
+^README.html$
+^_pkdown.yml$
+^example_email.rds$
+^example_info.rds$

@@ -10,6 +10,8 @@ b2n_send_newsletter(draft_email, cache = "_blog2newsletter", force = FALSE)
 \item{draft_email}{email created by \code{b2n_compose}}
 
 \item{cache}{the blog2newsletter cache location}
+
+\item{force}{send it even if it was previously sent}
 }
 \description{
 Send the drafted newsletter!

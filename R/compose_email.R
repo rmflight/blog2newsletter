@@ -144,6 +144,7 @@ b2n_find_post = function(blog_dir,
 #'
 #' @param draft_email email created by `b2n_compose`
 #' @param cache the blog2newsletter cache location
+#' @param force send it even if it was previously sent
 #'
 #' @export
 #' @seealso b2n_compose

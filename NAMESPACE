@@ -2,9 +2,9 @@
 
 export(b2n_clean_subscribers)
 export(b2n_compose)
+export(b2n_create_cache)
 export(b2n_draft_email)
 export(b2n_fetch_subscribers)
 export(b2n_find_post)
-export(b2n_init)
 export(b2n_run)
 export(b2n_send_newsletter)
