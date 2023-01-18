@@ -4,7 +4,7 @@
 \alias{b2n_run}
 \title{run full flow}
 \usage{
-b2n_run(run_file = here::here("_blog2newsletter.R"))
+b2n_run(run_file = "_blog2newsletter.R")
 }
 \arguments{
 \item{run_file}{which file to run through}

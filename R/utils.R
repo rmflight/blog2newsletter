@@ -6,7 +6,7 @@
 #'
 #' @export
 #' @return invisible
-b2n_run = function(run_file = here::here("_blog2newsletter.R"))
+b2n_run = function(run_file = "_blog2newsletter.R")
 {
   if (fs::file_exists(run_file)) {
     message(cli::cli_alert_info("Running workflow at {.file {run_file}}!"))
