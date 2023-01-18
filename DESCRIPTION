@@ -6,6 +6,8 @@ Authors@R:
            comment = c(ORCID = "0000-0001-8141-7788"))
 Description: Provides functions to help automate sending blog posts to subscribers email addresses.
 License: MIT + file LICENSE
+URL: https://rmflight.github.io/blog2newsletter, https://github.com/rmflight/blog2newsletter
+BugReports: https://github.com/rmflight/blog2newsletter/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1

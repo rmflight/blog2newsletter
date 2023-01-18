@@ -48,7 +48,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/rmflight/blog2newsletter/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -95,7 +102,7 @@
 <div class="section level3">
 <h3 id="gmail-oauth-scopes">Gmail Oauth Scopes<a class="anchor" aria-label="anchor" href="#gmail-oauth-scopes"></a>
 </h3>
-<p>One very important thing to note, is when you do the initial oauth setup, whatever <code>scopes</code> you use then, when you set it up again in the <code>{blog2newsletter}</code> workflow, make sure the <code>scopes</code> is identical, or you will have to do the whole browser oauth flow <strong>again</strong> (ask me how many times it took before I realized I had a different scope causing this).</p>
+<p>One very important thing to note, is when you do the initial oauth setup, whatever <code>scopes</code> you use then, when you set it up again in the <a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a> workflow, make sure the <code>scopes</code> is identical, or you will have to do the whole browser oauth flow <strong>again</strong> (ask me how many times it took before I realized I had a different scope causing this).</p>
 <p>For this project, really all you need are the <code>compose</code> and <code>send</code> scopes, so that you can see the draft in Gmail if you want, and send on your behalf, as shown here:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gm_auth</span><span class="op">(</span>scopes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"compose"</span>, <span class="st">"send"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -134,7 +141,7 @@
 <p>This form should <strong>collect emails</strong> (seriously, you can’t get an email newsletter without an email address):</p>
 <p>Settings -&gt; Responses -&gt; Collect email addresses -&gt; On</p>
 <p><img src="reference/figures/collect_emails.png" width="100%"></p>
-<p>If using <strong>categories</strong>, add your categories as <strong>checkboxes</strong> so subscribers can choose multiple subjects of posts. If <strong>not using</strong> categories, I would at least add the option for “All”. Mainly because this first version of <code>{blog2newsletter}</code> checks for that one, and the absence of any other categories means that no one will get your newsletter.</p>
+<p>If using <strong>categories</strong>, add your categories as <strong>checkboxes</strong> so subscribers can choose multiple subjects of posts. If <strong>not using</strong> categories, I would at least add the option for “All”. Mainly because this first version of <a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a> checks for that one, and the absence of any other categories means that no one will get your newsletter.</p>
 <p>Make sure to put the link to the form somewhere prominent on your blog!</p>
 </div>
 <div class="section level3">
@@ -177,7 +184,7 @@
 <div class="section level3">
 <h3 id="setup-the-blog2newsletter-cache-folder">Setup the blog2newsletter Cache Folder<a class="anchor" aria-label="anchor" href="#setup-the-blog2newsletter-cache-folder"></a>
 </h3>
-<p>There are two files that <code>{blog2newsletter}</code> uses to keep track of things, <code>subscribers</code> and <code>emails</code>.</p>
+<p>There are two files that <a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a> uses to keep track of things, <code>subscribers</code> and <code>emails</code>.</p>
 <ul>
 <li>
 <code>subscribers</code>: stores a local copy of the form submissions from the Google Sheet so you aren’t always fetching a new copy. Defaults to refetching after 168 hours (a week).</li>
@@ -186,7 +193,7 @@
 </ul>
 <p>The default location for these is in a folder called <code>_blog2newsletter</code>. Every function that uses the cache, also has a <code>cache</code> argument.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">blog2newsletter</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a></span><span class="op">)</span></span>
 <span><span class="fu">b2n_create_cache</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>If you don’t do this, you will get a message when you go to get subscriber data or draft the email.</p>
 </div>
@@ -208,7 +215,7 @@
 <div class="section level3">
 <h3 id="blog-rss">Blog RSS<a class="anchor" aria-label="anchor" href="#blog-rss"></a>
 </h3>
-<p>If you don’t already have an RSS feed for your blog, you <strong>need</strong> to set one up if you want to use <code>{blog2newsletter}</code> (see <a href="https://quarto.org/docs/websites/website-blog.html#:~:text=RSS%20Feed,-Blogs%20typically%20include%20an%20RSS" class="external-link">here</a> for <a href="https://github.com/quarto-dev/quarto-r" class="external-link">quarto</a> blogs, as well as <a href="https://rstudio.github.io/distill/blog.html#rss-feed" class="external-link">distill</a> and <a href="https://coolbutuseless.bitbucket.io/2018/02/07/blogdown-rss-feed-of-full-articles/" class="external-link">blogdown</a>). Thus far, I’ve only heavily tested <code>{blog2newsletter}</code> using a local RSS feed from a <a href="https://github.com/quarto-dev/quarto-r" class="external-link">quarto</a> based blog. These RSS feeds basically put the <strong>entirety</strong> of each post in each entry of the RSS. <strong>You should confirm this is the case for your own blog! If it is not, you should change your blog configuration so that the full contents are available at the RSS, and not just a preview or snippet.</strong> We query the RSS feed, grab the blog post asked for (typically the latest), and then push it into an email to be sent from GMail However, it works for any RSS feed that <code>{tidyrss}</code> can parse, including any hosted on the web, in case you want to use this for a different blogging platform.</p>
+<p>If you don’t already have an RSS feed for your blog, you <strong>need</strong> to set one up if you want to use <a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a> (see <a href="https://quarto.org/docs/websites/website-blog.html#:~:text=RSS%20Feed,-Blogs%20typically%20include%20an%20RSS" class="external-link">here</a> for <a href="https://github.com/quarto-dev/quarto-r" class="external-link">quarto</a> blogs, as well as <a href="https://rstudio.github.io/distill/blog.html#rss-feed" class="external-link">distill</a> and <a href="https://coolbutuseless.bitbucket.io/2018/02/07/blogdown-rss-feed-of-full-articles/" class="external-link">blogdown</a>). Thus far, I’ve only heavily tested <a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a> using a local RSS feed from a <a href="https://github.com/quarto-dev/quarto-r" class="external-link">quarto</a> based blog. These RSS feeds basically put the <strong>entirety</strong> of each post in each entry of the RSS. <strong>You should confirm this is the case for your own blog! If it is not, you should change your blog configuration so that the full contents are available at the RSS, and not just a preview or snippet.</strong> We query the RSS feed, grab the blog post asked for (typically the latest), and then push it into an email to be sent from GMail However, it works for any RSS feed that <code>{tidyrss}</code> can parse, including any hosted on the web, in case you want to use this for a different blogging platform.</p>
 <p>We need to tell our script where the RSS feed lives. For <a href="https://github.com/quarto-dev/quarto-r" class="external-link">quarto</a> blogs with default outputs, we just need the blog directory. Alternatively, provide the full path to the <code>index.xml</code> file, or the URL of the hosted version are.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># default</span></span>
@@ -241,7 +248,7 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gmailr.r-lib.org" class="external-link">gmailr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org" class="external-link">googlesheets4</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">blog2newsletter</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rmflight.github.io/blog2newsletter" class="external-link">blog2newsletter</a></span><span class="op">)</span></span>
 <span><span class="va">secrets_path</span> <span class="op">=</span> <span class="st">"secrets/client_secret_file_googleusercontent.com.json"</span></span>
 <span><span class="va">oauth_cache</span> <span class="op">=</span> <span class="st">"secrets/gargle_cache/"</span></span>
 <span></span>
@@ -284,7 +291,15 @@
 <p>This <code>source</code>’s the file <code>_blog2newsletter.R</code> by default, and your newsletter is sent or drafted!</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/rmflight/blog2newsletter/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/rmflight/blog2newsletter/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

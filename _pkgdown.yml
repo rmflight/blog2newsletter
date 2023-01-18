@@ -1,6 +1,7 @@
 template:
   bootstrap: 5
   bootswatch: darkly
+  theme: arrow-dark
 home:
   title: An R package to send blog posts as emails / newsletters.
   description: >
@@ -9,3 +10,7 @@ home:
     you covered.
   sidebar:
     structure: [links, license, community, citation, authors, toc]
+  navbar:
+    structure:
+      left:  [intro, reference, articles, tutorials, news]
+      right: [search, github]
