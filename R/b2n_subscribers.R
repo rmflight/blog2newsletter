@@ -25,12 +25,15 @@ b2n_clean_subscribers = function(subscriber_info)
 #'
 #' @param sheet_id either a Google Sheets URL or ID
 #' @param cache where to cache the subscriber data
+#' @param force_fetch override the cache, and force it to fetch from the web
+#' @param cache_timeout how old should the cache be before definitely getting it from the web
 #'
 #' @return tibble
 #' @export
 b2n_fetch_subscribers = function(sheet_id = NULL,
                                  cache = "_blog2newsletter",
-                                 force_fetch = FALSE)
+                                 force_fetch = FALSE,
+                                 cache_timeout = 168)
 {
   if (is.null(sheet_id)) {
     cli::cli_abort(c(
@@ -42,7 +45,7 @@ b2n_fetch_subscribers = function(sheet_id = NULL,
   subscriber_cache = file.path(cache, "subscribers")
   if (fs::file_exists(subscriber_cache)) {
     cache_mtime = file.mtime(subscriber_cache)
-    if ((difftime(Sys.Date(), cache_mtime, units = "hours") > 24) || force_fetch) {
+    if ((difftime(Sys.Date(), cache_mtime, units = "hours") > cache_timeout) || force_fetch) {
       subscriber_data = googlesheets4::read_sheet(sheet_id) |>
         b2n_clean_subscribers()
       save_subscriber_cache(subscriber_data, cache = subscriber_cache)

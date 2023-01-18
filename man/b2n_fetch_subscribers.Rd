@@ -7,13 +7,18 @@
 b2n_fetch_subscribers(
   sheet_id = NULL,
   cache = "_blog2newsletter",
-  force_fetch = FALSE
+  force_fetch = FALSE,
+  cache_timeout = 168
 )
 }
 \arguments{
 \item{sheet_id}{either a Google Sheets URL or ID}
 
 \item{cache}{where to cache the subscriber data}
+
+\item{force_fetch}{override the cache, and force it to fetch from the web}
+
+\item{cache_timeout}{how old should the cache be before definitely getting it from the web}
 }
 \value{
 tibble
