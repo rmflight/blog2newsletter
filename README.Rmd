@@ -245,31 +245,33 @@ blog_dir = "https://myblog.com/rss.xml"
 ### Test Composing and Sending
 
 Finally, we can fetch the blog post and draft the email newsletter we want to send.
-Note that `extra_subject` here is whatever subject you want to add to your email, normally as a way to tell those getting the email that it is a newlsetter email.
+Note that we add a subject in front of the post title to add to your email, normally as a way to tell those getting the email that it is a newlsetter email.
 It will be **prepended** to the title of the post being sent out.
 
 ```{r}
 #| label: draft_email
 #| eval: false
-draft_email = b2n_compose(blog_dir,
-                          subscriber_data = subscriber_data,
-                          from_email = "your_email@gmail.com",
-                          extra_subject = "subject")
+draft_email = blog_dir |>
+  b2n_post_to_email() |>
+  b2n_add_subscribers(subscriber_data) |>
+  b2n_from("your_email@gmail.com") |>
+  b2n_add_subject("cool newsletter!")
 ```
 
-If you want to preview it (and you authorized `gmailr` with the correct scopes), then you can use `b2n_create_draft` to push it to your GMail account and preview the email that is in `draft_email`.
+If you want to preview it (and you authorized `gmailr` with the correct scopes), then you can use `b2n_draft_email` to push it to your GMail account and preview the email that is in `draft_email`.
 This is a thin wrapper around `gmailr::gm_create_draft`, as `blog2newsletter` stores the draft email as a list, with the email, and the post data so it can be checked against previously sent newsletter emails.
 
 ```{r}
 #| label: view_draft
 #| eval: false
-b2n_create_draft(draft_email)
+b2n_draft_email(draft_email)
 ```
 
 
 ## Sending Posts as Emails / Newsletters
 
 The easiest way to semi-automate sending your posts is to put all the necessary code in a `.R` file with the name `_blog2newsletter.R`.
+This file is created by default when you run `b2n_create_cache()`.
 
 This file includes the oauth code we used above, and goes through most of the steps from above.
 
