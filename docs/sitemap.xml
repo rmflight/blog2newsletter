@@ -19,6 +19,12 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/b2n_add_subject.html</loc>
+  </url>
+  <url>
+    <loc>/reference/b2n_add_subscribers.html</loc>
+  </url>
+  <url>
     <loc>/reference/b2n_clean_subscribers.html</loc>
   </url>
   <url>
@@ -37,7 +43,13 @@
     <loc>/reference/b2n_find_post.html</loc>
   </url>
   <url>
+    <loc>/reference/b2n_from.html</loc>
+  </url>
+  <url>
     <loc>/reference/b2n_init.html</loc>
+  </url>
+  <url>
+    <loc>/reference/b2n_post_to_email.html</loc>
   </url>
   <url>
     <loc>/reference/b2n_run.html</loc>

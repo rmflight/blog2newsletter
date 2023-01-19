@@ -230,7 +230,7 @@
 </h3>
 <p>Finally, we can fetch the blog post and draft the email newsletter we want to send. Note that <code>extra_subject</code> here is whatever subject you want to add to your email, normally as a way to tell those getting the email that it is a newlsetter email. It will be <strong>prepended</strong> to the title of the post being sent out.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">draft_email</span> <span class="op">=</span> <span class="fu"><a href="reference/b2n_compose.html">b2n_compose</a></span><span class="op">(</span><span class="va">blog_dir</span>,</span>
+<code class="sourceCode R"><span><span class="va">draft_email</span> <span class="op">=</span> <span class="fu">b2n_compose</span><span class="op">(</span><span class="va">blog_dir</span>,</span>
 <span>                          subscriber_data <span class="op">=</span> <span class="va">subscriber_data</span>,</span>
 <span>                          from_email <span class="op">=</span> <span class="st">"your_email@gmail.com"</span>,</span>
 <span>                          extra_subject <span class="op">=</span> <span class="st">"subject"</span><span class="op">)</span></span></code></pre></div>
@@ -266,7 +266,7 @@
 <span>  gargle_oauth_email <span class="op">=</span> <span class="va">secrets_path</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://gmailr.r-lib.org/reference/gm_auth_configure.html" class="external-link">gm_auth_configure</a></span><span class="op">(</span>path  <span class="op">=</span> <span class="op">)</span></span>
+<span><span class="fu"><a href="https://gmailr.r-lib.org/reference/gm_auth_configure.html" class="external-link">gm_auth_configure</a></span><span class="op">(</span>path  <span class="op">=</span> <span class="va">secrets_path</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://gmailr.r-lib.org/reference/gm_auth.html" class="external-link">gm_auth</a></span><span class="op">(</span>scopes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"compose"</span>, <span class="st">"send"</span><span class="op">)</span>, </span>
 <span>        email <span class="op">=</span> <span class="va">my_gmail</span><span class="op">)</span></span>
 <span></span>
@@ -279,12 +279,12 @@
 <span></span>
 <span><span class="va">subscriber_data</span> <span class="op">=</span> <span class="fu"><a href="reference/b2n_fetch_subscribers.html">b2n_fetch_subscribers</a></span><span class="op">(</span><span class="va">subscribers_id</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">draft_email</span> <span class="op">=</span> <span class="fu"><a href="reference/b2n_compose.html">b2n_compose</a></span><span class="op">(</span><span class="va">blog_dir</span>,</span>
-<span>                          subscriber_data <span class="op">=</span> <span class="va">subscriber_data</span>,</span>
-<span>                          from_email <span class="op">=</span> <span class="va">my_gmail</span>,</span>
-<span>                          extra_subject <span class="op">=</span> <span class="va">extra_subject</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/b2n_send_newsletter.html">b2n_send_newsletter</a></span><span class="op">(</span><span class="va">draft_email</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">blog_dir</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/b2n_post_to_email.html">b2n_post_to_email</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/b2n_add_subscribers.html">b2n_add_subscribers</a></span><span class="op">(</span><span class="va">subscriber_data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/b2n_from.html">b2n_from</a></span><span class="op">(</span><span class="va">my_gmail</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/b2n_add_subject.html">b2n_add_subject</a></span><span class="op">(</span><span class="va">extra_subject</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/b2n_send_newsletter.html">b2n_send_newsletter</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Then, when you have new post that you want to send, in the subscription project, you only have to do:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">blog2newsletter</span><span class="fu">::</span><span class="fu"><a href="reference/b2n_run.html">b2n_run</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
