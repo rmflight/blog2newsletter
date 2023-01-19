@@ -296,7 +296,7 @@ options(
   gargle_oauth_email = secrets_path
 )
 
-gm_auth_configure(path  = )
+gm_auth_configure(path  = secrets_path)
 gm_auth(scopes = c("compose", "send"), 
         email = my_gmail)
 
@@ -309,12 +309,12 @@ subscribers_id = "your-sheet-id"
 
 subscriber_data = b2n_fetch_subscribers(subscribers_id)
 
-draft_email = b2n_compose(blog_dir,
-                          subscriber_data = subscriber_data,
-                          from_email = my_gmail,
-                          extra_subject = extra_subject)
-
-b2n_send_newsletter(draft_email)
+blog_dir |>
+  b2n_post_to_email() |>
+  b2n_add_subscribers(subscriber_data) |>
+  b2n_from(my_gmail) |>
+  b2n_add_subject(extra_subject) |>
+  b2n_send_newsletter()
 ```
 
 Then, when you have new post that you want to send, in the subscription project, you only have to do:

@@ -4,10 +4,10 @@
 \alias{b2n_draft_email}
 \title{creates draft in gmail}
 \usage{
-b2n_draft_email(draft_post)
+b2n_draft_email(post_email)
 }
 \arguments{
-\item{draft_post}{the post, created with \code{b2n_compose}}
+\item{post_email}{the post, created with \code{b2n_post_to_email}}
 }
 \description{
 Given the composed email, sends the email to GMail so it can be viewed in the \emph{drafts} folder.

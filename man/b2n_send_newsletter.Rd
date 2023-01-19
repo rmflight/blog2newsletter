@@ -4,17 +4,17 @@
 \alias{b2n_send_newsletter}
 \title{send it}
 \usage{
-b2n_send_newsletter(draft_email, cache = "_blog2newsletter", force = FALSE)
+b2n_send_newsletter(post_email, cache = "_blog2newsletter", force = FALSE)
 }
 \arguments{
-\item{draft_email}{email created by \code{b2n_compose}}
+\item{post_email}{email created by \code{b2n_post_to_email}}
 
 \item{cache}{the blog2newsletter cache location}
 
 \item{force}{send it even if it was previously sent}
 }
 \description{
-Send the drafted newsletter!
+Send the post email!
 }
 \seealso{
 b2n_compose
